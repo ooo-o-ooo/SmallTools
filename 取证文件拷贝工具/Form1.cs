@@ -17,7 +17,7 @@ namespace 取证文件拷贝工具
         public Form1()
         {
             InitializeComponent();
-            Init();
+            InitForm() ;
         }
 
         private void UiComboDataGridView1_SelectIndexChange(object sender, int index)
@@ -116,7 +116,7 @@ namespace 取证文件拷贝工具
                 flag = 1;
             Setting.Current.Flag = flag;
             Setting.Current.Save();
-            Init();
+            InitForm();
         }
 
         /// <summary>
@@ -175,11 +175,18 @@ namespace 取证文件拷贝工具
             this.HideWaitForm();
         }
 
-        private void uiButton5_Click(object sender, EventArgs e)
+        private void 案件报告_Click(object sender, EventArgs e)
         {
+            var selectedItems = (DriveInfoWrapper)uiComboBox1.SelectedItem;
+            this.ShowWaitForm("正在复制，请耐心等待...");
+            LogToDebugWindow(
+                MyClassForm.FcpConsole(Setting.Current.FcpCMD,
+                    Setting.Current.PathReport + "\\" + uiComboDataGridView1.Text, selectedItems.ActualValue)
+            );
+            this.HideWaitForm();
         }
 
-        public override void Init()
+        public void InitForm()
         {
             uiComboBox1.Items.Clear();
             uiComboBox2.Items.Clear();
@@ -200,6 +207,20 @@ namespace 取证文件拷贝工具
             uiComboDataGridView1.DataGridView.ReadOnly = true;
             uiComboDataGridView1.ShowFilter = true;
             uiComboDataGridView1.DataGridView.DataSource = directoryTable; //用DataTable做数据源过滤，用List不行
+
+
+
+            uiComboDataGridView2.Text = directoryTable.Rows[0][0].ToString();
+            uiComboDataGridView2.DataGridView.Init();
+            uiComboDataGridView2.DataGridView.MultiSelect = true;//设置可多选
+            uiComboDataGridView2.ItemSize = new Size(60, 40);
+            uiComboDataGridView2.DataGridView.AddColumn("案件目录", "Name");
+            uiComboDataGridView2.DataGridView.AddColumn("创建时间", "CreationTime");
+            uiComboDataGridView2.FilterColumnName = "Name";
+            uiComboDataGridView2.DataGridView.ReadOnly = true;
+            uiComboDataGridView2.ShowFilter = true;
+            uiComboDataGridView2.DataGridView.DataSource = directoryTable; //用DataTable做数据源过滤，用List不行
+
         }
 
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -209,12 +230,12 @@ namespace 取证文件拷贝工具
             frm.ShowDialog();
             if (frm.IsOK) this.ShowSuccessDialog("OK");
             frm.Dispose();
-            Init();
+            InitForm();
         }
 
         private void uiButton8_Click(object sender, EventArgs e)
         {
-            Init();
+            InitForm();
         }
 
 
@@ -248,9 +269,19 @@ namespace 取证文件拷贝工具
             LogToDebugWindow("目标路径：" + selectedItem);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void uiComboDataGridView2_ValueChanged(object sender, object value)
         {
-            MessageBox.Show(uiComboDataGridView1.Text);
+            uiComboDataGridView2.Text = "";
+            if (value != null && value is DataGridViewSelectedRowCollection)
+            {
+                DataGridViewSelectedRowCollection collection = (DataGridViewSelectedRowCollection)value;
+                foreach (var item in collection)
+                {
+                    DataGridViewRow row = (DataGridViewRow)item;
+                    uiComboDataGridView2.Text += row.Cells[0].Value.ToString();//通过索引显示值
+                    uiComboDataGridView2.Text += "; ";
+                }
+            }
         }
     }
 }

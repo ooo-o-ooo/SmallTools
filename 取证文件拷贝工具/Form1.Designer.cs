@@ -46,7 +46,7 @@
             this.获取照片 = new Sunny.UI.UIButton();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.button1 = new System.Windows.Forms.Button();
+            this.uiComboDataGridView2 = new Sunny.UI.UIComboDataGridView();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
@@ -116,7 +116,7 @@
             // 
             // uiGroupBox2
             // 
-            this.uiGroupBox2.Controls.Add(this.button1);
+            this.uiGroupBox2.Controls.Add(this.uiComboDataGridView2);
             this.uiGroupBox2.Controls.Add(this.uiComboDataGridView1);
             this.uiGroupBox2.Controls.Add(this.uiButton2);
             this.uiGroupBox2.Controls.Add(this.uiComboBox2);
@@ -142,7 +142,7 @@
             this.uiComboDataGridView1.MinimumSize = new System.Drawing.Size(63, 0);
             this.uiComboDataGridView1.Name = "uiComboDataGridView1";
             this.uiComboDataGridView1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.uiComboDataGridView1.Size = new System.Drawing.Size(765, 35);
+            this.uiComboDataGridView1.Size = new System.Drawing.Size(391, 35);
             this.uiComboDataGridView1.SymbolSize = 24;
             this.uiComboDataGridView1.TabIndex = 4;
             this.uiComboDataGridView1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -154,7 +154,7 @@
             // 
             this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton2.Location = new System.Drawing.Point(788, 37);
+            this.uiButton2.Location = new System.Drawing.Point(414, 37);
             this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton2.Name = "uiButton2";
             this.uiButton2.Size = new System.Drawing.Size(120, 35);
@@ -171,7 +171,7 @@
             this.uiComboBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiComboBox2.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiComboBox2.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiComboBox2.Location = new System.Drawing.Point(561, 145);
+            this.uiComboBox2.Location = new System.Drawing.Point(572, 37);
             this.uiComboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiComboBox2.MinimumSize = new System.Drawing.Size(63, 0);
             this.uiComboBox2.Name = "uiComboBox2";
@@ -180,7 +180,7 @@
             this.uiComboBox2.SymbolSize = 24;
             this.uiComboBox2.TabIndex = 2;
             this.uiComboBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiComboBox2.Watermark = "选择案件";
+            this.uiComboBox2.Watermark = "选择报告";
             // 
             // rtbDebugLog
             // 
@@ -253,7 +253,7 @@
             this.uiButton5.TabIndex = 3;
             this.uiButton5.Text = "拷贝生成报告";
             this.uiButton5.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton5.Click += new System.EventHandler(this.uiButton5_Click);
+            this.uiButton5.Click += new System.EventHandler(this.案件报告_Click);
             // 
             // uiButton4
             // 
@@ -309,15 +309,22 @@
             this.设置ToolStripMenuItem.Text = "设置";
             this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click);
             // 
-            // button1
+            // uiComboDataGridView2
             // 
-            this.button1.Location = new System.Drawing.Point(287, 116);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.uiComboDataGridView2.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
+            this.uiComboDataGridView2.FillColor = System.Drawing.Color.White;
+            this.uiComboDataGridView2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiComboDataGridView2.Location = new System.Drawing.Point(321, 120);
+            this.uiComboDataGridView2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.uiComboDataGridView2.MinimumSize = new System.Drawing.Size(63, 0);
+            this.uiComboDataGridView2.Name = "uiComboDataGridView2";
+            this.uiComboDataGridView2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
+            this.uiComboDataGridView2.Size = new System.Drawing.Size(391, 35);
+            this.uiComboDataGridView2.SymbolSize = 24;
+            this.uiComboDataGridView2.TabIndex = 5;
+            this.uiComboDataGridView2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
+            this.uiComboDataGridView2.Watermark = "选择报告";
+            this.uiComboDataGridView2.ValueChanged += new Sunny.UI.UIComboDataGridView.OnValueChanged(this.uiComboDataGridView2_ValueChanged);
             // 
             // Form1
             // 
@@ -362,7 +369,7 @@
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private Sunny.UI.UIButton uiButton8;
         private Sunny.UI.UIComboDataGridView uiComboDataGridView1;
-        private System.Windows.Forms.Button button1;
+        private Sunny.UI.UIComboDataGridView uiComboDataGridView2;
     }
 }
 
