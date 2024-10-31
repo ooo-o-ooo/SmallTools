@@ -56,7 +56,6 @@
   <ItemGroup>
     <Compile Include="cs\ConfigFile.cs" />
     <Compile Include="cs\DriveInfoWrapper.cs" />
-    <Compile Include="cs\DriverInfo.cs" />
     <Compile Include="cs\MyClassForm.cs" />
     <Compile Include="cs\UserSettings.cs">
       <SubType>Form</SubType>

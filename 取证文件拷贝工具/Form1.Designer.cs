@@ -23,8 +23,8 @@
         #region Windows 窗体设计器生成的代码
 
         /// <summary>
-        /// 设计器支持所需的方法 - 不要修改
-        /// 使用代码编辑器修改此方法的内容。
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
@@ -43,9 +43,10 @@
             this.uiButton5 = new Sunny.UI.UIButton();
             this.uiButton4 = new Sunny.UI.UIButton();
             this.uiButton3 = new Sunny.UI.UIButton();
-            this.uiButton1 = new Sunny.UI.UIButton();
+            this.获取照片 = new Sunny.UI.UIButton();
             this.uiContextMenuStrip1 = new Sunny.UI.UIContextMenuStrip();
             this.设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.uiGroupBox1.SuspendLayout();
             this.uiGroupBox2.SuspendLayout();
             this.uiGroupBox3.SuspendLayout();
@@ -115,6 +116,7 @@
             // 
             // uiGroupBox2
             // 
+            this.uiGroupBox2.Controls.Add(this.button1);
             this.uiGroupBox2.Controls.Add(this.uiComboDataGridView1);
             this.uiGroupBox2.Controls.Add(this.uiButton2);
             this.uiGroupBox2.Controls.Add(this.uiComboBox2);
@@ -135,12 +137,12 @@
             this.uiComboDataGridView1.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
             this.uiComboDataGridView1.FillColor = System.Drawing.Color.White;
             this.uiComboDataGridView1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiComboDataGridView1.Location = new System.Drawing.Point(485, 38);
+            this.uiComboDataGridView1.Location = new System.Drawing.Point(16, 37);
             this.uiComboDataGridView1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiComboDataGridView1.MinimumSize = new System.Drawing.Size(63, 0);
             this.uiComboDataGridView1.Name = "uiComboDataGridView1";
             this.uiComboDataGridView1.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.uiComboDataGridView1.Size = new System.Drawing.Size(423, 35);
+            this.uiComboDataGridView1.Size = new System.Drawing.Size(765, 35);
             this.uiComboDataGridView1.SymbolSize = 24;
             this.uiComboDataGridView1.TabIndex = 4;
             this.uiComboDataGridView1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
@@ -152,7 +154,7 @@
             // 
             this.uiButton2.Cursor = System.Windows.Forms.Cursors.Hand;
             this.uiButton2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton2.Location = new System.Drawing.Point(333, 38);
+            this.uiButton2.Location = new System.Drawing.Point(788, 37);
             this.uiButton2.MinimumSize = new System.Drawing.Size(1, 1);
             this.uiButton2.Name = "uiButton2";
             this.uiButton2.Size = new System.Drawing.Size(120, 35);
@@ -169,7 +171,7 @@
             this.uiComboBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiComboBox2.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
             this.uiComboBox2.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiComboBox2.Location = new System.Drawing.Point(16, 37);
+            this.uiComboBox2.Location = new System.Drawing.Point(561, 145);
             this.uiComboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.uiComboBox2.MinimumSize = new System.Drawing.Size(63, 0);
             this.uiComboBox2.Name = "uiComboBox2";
@@ -203,7 +205,7 @@
             this.uiGroupBox3.Controls.Add(this.uiButton5);
             this.uiGroupBox3.Controls.Add(this.uiButton4);
             this.uiGroupBox3.Controls.Add(this.uiButton3);
-            this.uiGroupBox3.Controls.Add(this.uiButton1);
+            this.uiGroupBox3.Controls.Add(this.获取照片);
             this.uiGroupBox3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.uiGroupBox3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiGroupBox3.Location = new System.Drawing.Point(0, 291);
@@ -277,18 +279,18 @@
             this.uiButton3.Text = "获取取证照片";
             this.uiButton3.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             // 
-            // uiButton1
+            // 获取照片
             // 
-            this.uiButton1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.uiButton1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Location = new System.Drawing.Point(27, 51);
-            this.uiButton1.MinimumSize = new System.Drawing.Size(1, 1);
-            this.uiButton1.Name = "uiButton1";
-            this.uiButton1.Size = new System.Drawing.Size(113, 35);
-            this.uiButton1.TabIndex = 0;
-            this.uiButton1.Text = "获取取证照片";
-            this.uiButton1.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiButton1.Click += new System.EventHandler(this.uiButton1_Click);
+            this.获取照片.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.获取照片.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.获取照片.Location = new System.Drawing.Point(27, 51);
+            this.获取照片.MinimumSize = new System.Drawing.Size(1, 1);
+            this.获取照片.Name = "获取照片";
+            this.获取照片.Size = new System.Drawing.Size(113, 35);
+            this.获取照片.TabIndex = 0;
+            this.获取照片.Text = "获取取证照片";
+            this.获取照片.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.获取照片.Click += new System.EventHandler(this.获取照片_Click);
             // 
             // uiContextMenuStrip1
             // 
@@ -306,6 +308,16 @@
             this.设置ToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
             this.设置ToolStripMenuItem.Text = "设置";
             this.设置ToolStripMenuItem.Click += new System.EventHandler(this.设置ToolStripMenuItem_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(287, 116);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
@@ -340,7 +352,7 @@
         private Sunny.UI.UIRichTextBox rtbDebugLog;
         private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIGroupBox uiGroupBox3;
-        private Sunny.UI.UIButton uiButton1;
+        private Sunny.UI.UIButton 获取照片;
         private Sunny.UI.UIButton uiButton7;
         private Sunny.UI.UIButton uiButton6;
         private Sunny.UI.UIButton uiButton5;
@@ -350,6 +362,7 @@
         private System.Windows.Forms.ToolStripMenuItem 设置ToolStripMenuItem;
         private Sunny.UI.UIButton uiButton8;
         private Sunny.UI.UIComboDataGridView uiComboDataGridView1;
+        private System.Windows.Forms.Button button1;
     }
 }
 
