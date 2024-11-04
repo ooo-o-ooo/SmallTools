@@ -167,11 +167,12 @@ namespace 取证文件拷贝工具
         /// <param name="e">包含事件数据的EventArgs对象。</param>
         private void 获取照片_Click(object sender, EventArgs e)
         {
+            DataGridViewRow selectedRow = uiComboDataGridView1.DataGridView.SelectedRows[0];
             var selectedItems = (DriveInfoWrapper)uiComboBox1.SelectedItem;
+            string sourcePath = selectedRow.Cells[2].Value.ToString();
             this.ShowWaitForm("正在复制，请耐心等待...");
             LogToDebugWindow(
-                MyClassForm.FcpConsole(Setting.Current.FcpCMD,
-                    Setting.Current.PathTemp + "\\" + uiComboDataGridView1.Text, selectedItems.ActualValue)
+                MyClassForm.FcpConsole(Setting.Current.FcpCMD, sourcePath, selectedItems.ActualValue)
             );
             this.HideWaitForm();
         }
