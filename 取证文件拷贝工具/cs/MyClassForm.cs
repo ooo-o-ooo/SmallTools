@@ -117,7 +117,7 @@ namespace 取证文件拷贝工具.cs
             DataTable dt = new DataTable("DirectoryContents");
             dt.Columns.Add("Name", typeof(string)); // 文件或子目录的名称
             dt.Columns.Add("CreationTime", typeof(DateTime)); // 创建时间
-            dt.Columns.Add("LastWriteTime", typeof(DateTime)); // 最后写入时间
+            dt.Columns.Add("FullPath", typeof(string)); // 最后写入时间
             DirectoryInfo dirInfo = new DirectoryInfo(Setting.Current.PathTemp);
             DirectoryInfo[] sortedFolders = null;
             switch (flag)
@@ -142,15 +142,54 @@ namespace 取证文件拷贝工具.cs
                 DataRow row = dt.NewRow();
                 row["Name"] = folder.Name;
                 row["CreationTime"] = folder.CreationTime;
-                row["LastWriteTime"] = folder.LastWriteTime;
+                row["FullPath"] = folder.FullName;
                 dt.Rows.Add(row);
             }
 
             return dt; // 返回填充了数据的 DataTable
 
         }
-    }
+        public static DataTable ConvertFileNameInfoToDataTable(string folderPath)
+        {
 
+            DataTable dt = new DataTable("FileInfo");
+            dt.Columns.Add("Name", typeof(string)); // 文件或子目录的名称
+            dt.Columns.Add("CreationTime", typeof(DateTime)); // 创建时间
+            dt.Columns.Add("FilePath", typeof(string));
+
+
+            try
+            {
+                // 获取文件夹下的所有文件
+                string[] files = Directory.GetFiles(folderPath,"*.txt");
+
+                // 遍历文件并将信息添加到DataTable中
+                foreach (string file in files)
+                {
+                    FileInfo fileInfo = new FileInfo(file);
+                    dt.Rows.Add(
+                        fileInfo.Name, // 文件名
+                        fileInfo.CreationTime,
+                        fileInfo.FullName
+                    );
+                }
+
+                // 输出DataTable中的信息（可选，仅用于验证）
+                Console.WriteLine("Files information:");
+                foreach (DataRow row in dt.Rows)
+                {
+                    Console.WriteLine($"FileName: {row["FileName"]}, FileSize: {row["FileSize"]}, CreationTime: {row["CreationTime"]}, LastWriteTime: {row["LastWriteTime"]}, FilePath: {row["FilePath"]}");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+            return dt;
+        }
+
+    }
+    
     public class DiskList
     {
         public string Name { get; set; }

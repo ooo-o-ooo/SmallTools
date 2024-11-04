@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
@@ -191,6 +192,7 @@ namespace 取证文件拷贝工具
             uiComboBox1.Items.Clear();
             uiComboBox2.Items.Clear();
             uiComboDataGridView1.DataGridView.Columns.Clear();
+            uiComboDataGridView2.DataGridView.Columns.Clear();
             ///初始化
             initDriverData();
             initDiskData(Setting.Current.Flag);
@@ -203,23 +205,26 @@ namespace 取证文件拷贝工具
             uiComboDataGridView1.ItemSize = new Size(60, 40);
             uiComboDataGridView1.DataGridView.AddColumn("案件目录", "Name");
             uiComboDataGridView1.DataGridView.AddColumn("创建时间", "CreationTime");
+            uiComboDataGridView1.DataGridView.AddColumn("文件路径", "FullPath").Visible = false;
             uiComboDataGridView1.FilterColumnName = "Name";
             uiComboDataGridView1.DataGridView.ReadOnly = true;
             uiComboDataGridView1.ShowFilter = true;
             uiComboDataGridView1.DataGridView.DataSource = directoryTable; //用DataTable做数据源过滤，用List不行
 
+            var fileInfoTable = MyClassForm.ConvertFileNameInfoToDataTable(Setting.Current.PathReport);
 
-
-            uiComboDataGridView2.Text = directoryTable.Rows[0][0].ToString();
+            uiComboDataGridView2.Text = fileInfoTable.Rows[0][0].ToString();
             uiComboDataGridView2.DataGridView.Init();
-            uiComboDataGridView2.DataGridView.MultiSelect = true;//设置可多选
+            uiComboDataGridView2.DataGridView.MultiSelect = true;
             uiComboDataGridView2.ItemSize = new Size(60, 40);
             uiComboDataGridView2.DataGridView.AddColumn("案件目录", "Name");
             uiComboDataGridView2.DataGridView.AddColumn("创建时间", "CreationTime");
+            uiComboDataGridView2.DataGridView.AddColumn("文件路径", "FilePath").Visible = false;
             uiComboDataGridView2.FilterColumnName = "Name";
             uiComboDataGridView2.DataGridView.ReadOnly = true;
             uiComboDataGridView2.ShowFilter = true;
-            uiComboDataGridView2.DataGridView.DataSource = directoryTable; //用DataTable做数据源过滤，用List不行
+            uiComboDataGridView2.DataGridView.DataSource = fileInfoTable;
+
 
         }
 
@@ -245,7 +250,7 @@ namespace 取证文件拷贝工具
             if (value != null && value is DataGridViewRow)
             {
                 var row = (DataGridViewRow)value;
-                uiComboDataGridView1.Text = row.Cells["案件目录"].Value.ToString(); //通过ColumnName显示值
+                uiComboDataGridView1.Text = row.Cells[2].Value.ToString(); //通过ColumnName显示值
             }
         }
 
@@ -278,10 +283,13 @@ namespace 取证文件拷贝工具
                 foreach (var item in collection)
                 {
                     DataGridViewRow row = (DataGridViewRow)item;
-                    uiComboDataGridView2.Text += row.Cells[0].Value.ToString();//通过索引显示值
+                    uiComboDataGridView2.Text += row.Cells[2].Value.ToString();//通过索引显示值
                     uiComboDataGridView2.Text += "; ";
                 }
             }
+        }
+        private void uiButton6_Click(object sender, EventArgs e)
+        {
         }
     }
 }
