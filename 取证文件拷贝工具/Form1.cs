@@ -21,11 +21,6 @@ namespace 取证文件拷贝工具
             InitForm() ;
         }
 
-        private void UiComboDataGridView1_SelectIndexChange(object sender, int index)
-        {
-            uiComboDataGridView1.Text = directoryInfo.Name[index].ToString();
-            MessageBox.Show(directoryInfo.Name[index].ToString());
-        }
 
 
         /// <summary>
@@ -74,8 +69,6 @@ namespace 取证文件拷贝工具
                 }
 
 
-                uiComboBox2.DisplayMember = "Name";
-                foreach (var folder in sortedFolders) uiComboBox2.Items.Add(folder);
             }
             catch (Exception ex)
             {
@@ -109,7 +102,6 @@ namespace 取证文件拷贝工具
         /// <param name="e">包含事件数据的EventArgs对象。</param>
         private void uiButton2_Click(object sender, EventArgs e)
         {
-            uiComboBox2.Items.Clear();
             var flag = Setting.Current.Flag;
             if (flag < 4)
                 flag++;
@@ -169,7 +161,7 @@ namespace 取证文件拷贝工具
         {
             DataGridViewRow selectedRow = uiComboDataGridView1.DataGridView.SelectedRows[0];
             var selectedItems = (DriveInfoWrapper)uiComboBox1.SelectedItem;
-            string sourcePath = selectedRow.Cells[2].Value.ToString();
+            string sourcePath = "\""+selectedRow.Cells[2].Value.ToString()+ "\"";
             this.ShowWaitForm("正在复制，请耐心等待...");
             LogToDebugWindow(
                 MyClassForm.FcpConsole(Setting.Current.FcpCMD, sourcePath, selectedItems.ActualValue)
@@ -179,11 +171,27 @@ namespace 取证文件拷贝工具
 
         private void 案件报告_Click(object sender, EventArgs e)
         {
+
+            string allPath = uiComboDataGridView2.Text;
+            string[] parts = allPath.Split(';');
+            StringBuilder sb = new StringBuilder();
+            string sourcePath = string.Empty;
+
+            foreach (string item in parts)
+            {
+                sb.Append(item);
+            }
+            sourcePath = sb.ToString();
+
+
+            LogToDebugWindow("SOURCEFILES:" + sourcePath);
+            LogToDebugWindow("====================================================================");
+
+
             var selectedItems = (DriveInfoWrapper)uiComboBox1.SelectedItem;
             this.ShowWaitForm("正在复制，请耐心等待...");
             LogToDebugWindow(
-                MyClassForm.FcpConsole(Setting.Current.FcpCMD,
-                    Setting.Current.PathReport + "\\" + uiComboDataGridView1.Text, selectedItems.ActualValue)
+                MyClassForm.FcpConsole(Setting.Current.FcpCMD, sourcePath , selectedItems.ActualValue)
             );
             this.HideWaitForm();
         }
@@ -191,7 +199,6 @@ namespace 取证文件拷贝工具
         public void InitForm()
         {
             uiComboBox1.Items.Clear();
-            uiComboBox2.Items.Clear();
             uiComboDataGridView1.DataGridView.Columns.Clear();
             uiComboDataGridView2.DataGridView.Columns.Clear();
             ///初始化
@@ -199,7 +206,6 @@ namespace 取证文件拷贝工具
             initDiskData(Setting.Current.Flag);
 
             uiComboBox1.SelectedIndex = 0;
-            uiComboBox2.SelectedIndex = 0;
             var directoryTable = MyClassForm.ConvertDirectoryInfoToDataTable(directoryInfo, Setting.Current.Flag);
             uiComboDataGridView1.Text = directoryTable.Rows[0][0].ToString();
             uiComboDataGridView1.DataGridView.Init();
@@ -211,22 +217,6 @@ namespace 取证文件拷贝工具
             uiComboDataGridView1.DataGridView.ReadOnly = true;
             uiComboDataGridView1.ShowFilter = true;
             uiComboDataGridView1.DataGridView.DataSource = directoryTable; //用DataTable做数据源过滤，用List不行
-
-            var fileInfoTable = MyClassForm.ConvertFileNameInfoToDataTable(Setting.Current.PathReport);
-
-            uiComboDataGridView2.Text = fileInfoTable.Rows[0][0].ToString();
-            uiComboDataGridView2.DataGridView.Init();
-            uiComboDataGridView2.DataGridView.MultiSelect = true;
-            uiComboDataGridView2.ItemSize = new Size(60, 40);
-            uiComboDataGridView2.DataGridView.AddColumn("案件目录", "Name");
-            uiComboDataGridView2.DataGridView.AddColumn("创建时间", "CreationTime");
-            uiComboDataGridView2.DataGridView.AddColumn("文件路径", "FilePath").Visible = false;
-            uiComboDataGridView2.FilterColumnName = "Name";
-            uiComboDataGridView2.DataGridView.ReadOnly = true;
-            uiComboDataGridView2.ShowFilter = true;
-            uiComboDataGridView2.DataGridView.DataSource = fileInfoTable;
-
-
         }
 
         private void 设置ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -277,6 +267,9 @@ namespace 取证文件拷贝工具
 
         private void uiComboDataGridView2_ValueChanged(object sender, object value)
         {
+
+
+
             uiComboDataGridView2.Text = "";
             if (value != null && value is DataGridViewSelectedRowCollection)
             {
@@ -291,6 +284,44 @@ namespace 取证文件拷贝工具
         }
         private void uiButton6_Click(object sender, EventArgs e)
         {
+            Process.Start("explorer.exe", Setting.Current.PathReport);
+        }
+
+        private void uiComboDataGridView2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiComboDataGridView2_ButtonClick(object sender, EventArgs e)
+        {
+            uiComboDataGridView2.Text = "";
+            uiComboDataGridView2.DataGridView.Columns.Clear();
+            DataGridViewRow selectedRow = uiComboDataGridView1.DataGridView.SelectedRows[0];
+            string sourceName = selectedRow.Cells[0].Value.ToString(); //获取案件名
+            var fileInfoTable = MyClassForm.ConvertFileNameInfoToDataTable(Setting.Current.PathReport + sourceName);
+            LogToDebugWindow(Setting.Current.PathReport + sourceName);
+            if (fileInfoTable.Rows.Count > 0)
+            {
+                uiComboDataGridView2.Text = fileInfoTable.Rows[0][0].ToString();
+            }
+            uiComboDataGridView2.DataGridView.Init();
+            uiComboDataGridView2.DataGridView.MultiSelect = true;
+            uiComboDataGridView2.ItemSize = new Size(60, 40);
+            uiComboDataGridView2.DataGridView.AddColumn("案件报告", "Name");
+            uiComboDataGridView2.DataGridView.AddColumn("创建时间", "CreationTime");
+            uiComboDataGridView2.DataGridView.AddColumn("文件路径", "FilePath").Visible = false;
+            uiComboDataGridView2.FilterColumnName = "Name";
+            uiComboDataGridView2.DataGridView.ReadOnly = true;
+            uiComboDataGridView2.ShowFilter = true;
+            uiComboDataGridView2.DataGridView.DataSource = fileInfoTable;
+        }
+
+        private void uiButton4_Click(object sender, EventArgs e)
+        {
+
+            DataGridViewRow selectedRow = uiComboDataGridView1.DataGridView.SelectedRows[0];
+            Process.Start("explorer.exe", selectedRow.Cells[2].Value.ToString());
+
         }
     }
 }

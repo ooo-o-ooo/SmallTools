@@ -36,7 +36,6 @@
             this.uiComboDataGridView2 = new Sunny.UI.UIComboDataGridView();
             this.uiComboDataGridView1 = new Sunny.UI.UIComboDataGridView();
             this.uiButton2 = new Sunny.UI.UIButton();
-            this.uiComboBox2 = new Sunny.UI.UIComboBox();
             this.rtbDebugLog = new Sunny.UI.UIRichTextBox();
             this.uiGroupBox3 = new Sunny.UI.UIGroupBox();
             this.uiButton7 = new Sunny.UI.UIButton();
@@ -119,7 +118,6 @@
             this.uiGroupBox2.Controls.Add(this.uiComboDataGridView2);
             this.uiGroupBox2.Controls.Add(this.uiComboDataGridView1);
             this.uiGroupBox2.Controls.Add(this.uiButton2);
-            this.uiGroupBox2.Controls.Add(this.uiComboBox2);
             this.uiGroupBox2.Dock = System.Windows.Forms.DockStyle.Top;
             this.uiGroupBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiGroupBox2.Location = new System.Drawing.Point(0, 100);
@@ -148,6 +146,8 @@
             this.uiComboDataGridView2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiComboDataGridView2.Watermark = "选择报告";
             this.uiComboDataGridView2.ValueChanged += new Sunny.UI.UIComboDataGridView.OnValueChanged(this.uiComboDataGridView2_ValueChanged);
+            this.uiComboDataGridView2.ButtonClick += new System.EventHandler(this.uiComboDataGridView2_ButtonClick);
+            this.uiComboDataGridView2.Click += new System.EventHandler(this.uiComboDataGridView2_Click);
             // 
             // uiComboDataGridView1
             // 
@@ -164,7 +164,6 @@
             this.uiComboDataGridView1.TabIndex = 4;
             this.uiComboDataGridView1.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
             this.uiComboDataGridView1.Watermark = "选择案件";
-            this.uiComboDataGridView1.SelectIndexChange += new Sunny.UI.UIDataGridView.OnSelectIndexChange(this.UiComboDataGridView1_SelectIndexChange);
             this.uiComboDataGridView1.ValueChanged += new Sunny.UI.UIComboDataGridView.OnValueChanged(this.uiComboDataGridView1_ValueChanged);
             // 
             // uiButton2
@@ -179,25 +178,6 @@
             this.uiButton2.Text = "文件夹排序";
             this.uiButton2.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton2.Click += new System.EventHandler(this.uiButton2_Click);
-            // 
-            // uiComboBox2
-            // 
-            this.uiComboBox2.DataSource = null;
-            this.uiComboBox2.DropDownStyle = Sunny.UI.UIDropDownStyle.DropDownList;
-            this.uiComboBox2.FillColor = System.Drawing.Color.White;
-            this.uiComboBox2.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.uiComboBox2.ItemHoverColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(200)))), ((int)(((byte)(255)))));
-            this.uiComboBox2.ItemSelectForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(235)))), ((int)(((byte)(243)))), ((int)(((byte)(255)))));
-            this.uiComboBox2.Location = new System.Drawing.Point(165, 145);
-            this.uiComboBox2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.uiComboBox2.MinimumSize = new System.Drawing.Size(63, 0);
-            this.uiComboBox2.Name = "uiComboBox2";
-            this.uiComboBox2.Padding = new System.Windows.Forms.Padding(0, 0, 30, 2);
-            this.uiComboBox2.Size = new System.Drawing.Size(310, 36);
-            this.uiComboBox2.SymbolSize = 24;
-            this.uiComboBox2.TabIndex = 2;
-            this.uiComboBox2.TextAlignment = System.Drawing.ContentAlignment.MiddleLeft;
-            this.uiComboBox2.Watermark = "选择报告";
             // 
             // rtbDebugLog
             // 
@@ -238,6 +218,7 @@
             // uiButton7
             // 
             this.uiButton7.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton7.Enabled = false;
             this.uiButton7.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton7.Location = new System.Drawing.Point(795, 51);
             this.uiButton7.MinimumSize = new System.Drawing.Size(1, 1);
@@ -256,7 +237,7 @@
             this.uiButton6.Name = "uiButton6";
             this.uiButton6.Size = new System.Drawing.Size(113, 35);
             this.uiButton6.TabIndex = 4;
-            this.uiButton6.Text = "获取取证照片";
+            this.uiButton6.Text = "打开报告目录";
             this.uiButton6.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton6.Click += new System.EventHandler(this.uiButton6_Click);
             // 
@@ -282,12 +263,14 @@
             this.uiButton4.Name = "uiButton4";
             this.uiButton4.Size = new System.Drawing.Size(113, 35);
             this.uiButton4.TabIndex = 2;
-            this.uiButton4.Text = "获取取证照片";
+            this.uiButton4.Text = "打开案件目录";
             this.uiButton4.TipsFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.uiButton4.Click += new System.EventHandler(this.uiButton4_Click);
             // 
             // uiButton3
             // 
             this.uiButton3.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.uiButton3.Enabled = false;
             this.uiButton3.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.uiButton3.Location = new System.Drawing.Point(635, 51);
             this.uiButton3.MinimumSize = new System.Drawing.Size(1, 1);
@@ -356,7 +339,6 @@
         private Sunny.UI.UIComboBox uiComboBox1;
         private Sunny.UI.UILabel uiLabel1;
         private Sunny.UI.UIGroupBox uiGroupBox2;
-        private Sunny.UI.UIComboBox uiComboBox2;
         private Sunny.UI.UIRichTextBox rtbDebugLog;
         private Sunny.UI.UIButton uiButton2;
         private Sunny.UI.UIGroupBox uiGroupBox3;

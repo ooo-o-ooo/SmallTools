@@ -24,11 +24,9 @@ namespace 取证文件拷贝工具.cs
         {
             string exePath = AppDomain.CurrentDomain.BaseDirectory + @"tools\FastCopy\fcp.exe";
             StringBuilder argumentsBuilder = new StringBuilder();
-            argumentsBuilder.Append(cmd);
-            argumentsBuilder.Append(" \"");
+            argumentsBuilder.Append(cmd+" ");
             argumentsBuilder.Append(sourcePath);
-            argumentsBuilder.Append("\" ");
-            argumentsBuilder.Append("/to=");
+            argumentsBuilder.Append(" /to=");
             argumentsBuilder.Append("\"");
             argumentsBuilder.Append(toPath);
             argumentsBuilder.Append("\" ");
@@ -161,7 +159,7 @@ namespace 取证文件拷贝工具.cs
             try
             {
                 // 获取文件夹下的所有文件
-                string[] files = Directory.GetFiles(folderPath,"*.txt");
+                string[] files = Directory.GetFiles(folderPath,"*.*");
 
                 // 遍历文件并将信息添加到DataTable中
                 foreach (string file in files)
